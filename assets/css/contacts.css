@@ -1,0 +1,123 @@
+.contacts__inner {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.contacts__box {
+    padding: 4rem;
+    background-color: #fff;
+    border-radius: 2rem;
+
+    filter: drop-shadow(.2rem .2rem .7rem rgba(142, 142, 142, .18));
+}
+
+.contacts__title {
+    color: var(--blue);
+    font-size: 4rem;
+    font-weight: 800;
+    margin-bottom: 2rem;
+}
+
+.contacts__info:not(:last-child) {
+    margin-bottom: 1.5rem;
+}
+
+.contacts__info {
+    display: flex;
+    align-items: start;
+    gap: 1rem;
+    font-weight: 600;
+}
+
+.contacts__name {
+    flex-shrink: 0;
+    color: var(--black);
+}
+
+.contacts__text {
+    color: var(--text-gray);
+}
+
+.contacts__text strong {
+    color: var(--black);
+    font-weight: 600;
+}
+
+.map__block {
+    border-radius: 2rem;
+    overflow: hidden;
+    filter: drop-shadow(.2rem .2rem .7rem rgba(142, 142, 142, .18));
+}
+
+.contacts-info__inner {
+    display: flex;
+    align-items: start;
+    gap: 10rem;
+    justify-content: start;
+}
+
+.contacts-info__left {
+    max-width: 57.8rem;
+}
+
+.contacts-info__right .contacts__info:not(:last-child) {
+    margin-bottom: .5rem;
+}
+
+@media (max-width: 960px) {
+    .contacts__inner {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .contacts__box {
+        padding: 3rem 4rem;
+    }
+
+    .contacts__title {
+        font-size: 3rem;
+    }
+
+    .contacts__name {
+        font-weight: 700;
+    }
+
+    .contacts__text strong {
+        font-weight: 700;
+    }
+
+    .map__block {
+        max-height: 60rem;
+    }
+
+    .contacts-info__inner {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .contacts-info__left {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 960px) {
+
+    .contacts__box {
+        padding: 2rem 1.5rem;
+    }
+
+    .contacts__title {
+        font-size: 2rem;
+    }
+
+    .contacts__info {
+        flex-wrap: wrap;
+    }
+        .contacts__info {
+            gap: .5rem;
+        }
+
+    .map__block {
+        max-height: 100%;
+    }
+}
