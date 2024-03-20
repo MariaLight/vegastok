@@ -30,7 +30,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 text.style.fill = "#F10000";
             })
             document.querySelectorAll(`.${btnId}`).forEach(function (text) {
-                text.style.stroke = "#F10000";
+                if (text.parentNode.classList.contains('schema-more')) {
+                    text.style.fill = "#F10000";
+
+                }
+                else {
+                    text.style.stroke = "#F10000";
+
+                }
             })
         })
     })
@@ -49,7 +56,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 text.style.fill = "#F10000";
             })
             document.querySelectorAll(`.${btnId}`).forEach(function (text) {
-                text.style.stroke = "#F10000";
+                if (text.parentNode.classList.contains('schema-more')) {
+                    text.style.fill = "#F10000";
+
+                }
+                else {
+                    text.style.stroke = "#F10000";
+
+                }
+
             })
         })
     })
@@ -59,7 +74,14 @@ document.addEventListener("DOMContentLoaded", () => {
             text.style.fill = "#100F0D";
         })
         document.querySelectorAll(`.${button.id}`).forEach(function (text) {
-            text.style.stroke = "#666666";
+            if (text.parentNode.classList.contains('schema-more')) {
+                text.style.fill = "#666666";
+
+            }
+            else {
+                text.style.stroke = "#666666";
+
+            }
         })
     }
     let calcsSwipers = document.querySelectorAll('.swiper-colors');
@@ -99,41 +121,59 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     let typeInputs = document.querySelectorAll('input[name="type"]');
+
+
     if (typeInputs) {
-        typeInputs.forEach(function(input){
-            input.addEventListener('change', function(e){
+        typeInputs.forEach(function (input) {
+            input.addEventListener('change', function (e) {
                 let value = input.value;
-                console.log(value);
                 document.querySelectorAll(`.can-hide`).forEach(function (item) {
                     item.classList.remove('active')
                     item.querySelector('input').disabled = false;
                     item.querySelector('input').checked = false;
                 })
-                if (input.checked){
-                    document.querySelectorAll(`.${value}-disabled`).forEach(function (item){
+                document.querySelectorAll('input[name="color"]').forEach(function (item) {
+                    
+                    
+                    item.checked = false;
+                })
+                if (input.checked) {
+
+                    document.querySelectorAll(`.${value}-disabled`).forEach(function (item) {
                         item.classList.add('active')
                         item.querySelector('input').disabled = true;
                     })
-                    
+                    if (input.value == 'premium') {
+                        console.log(document.querySelector('input[value="figure"]'))
+                        document.querySelector('input[value="figure"]').checked = true;
+                        document.querySelector('input[value="circle"]').checked = true;
+                    } else if (input.value == 'econom') {
+                        document.querySelector('input[value="figure"]').checked = true;
+                        document.querySelector('input[value="m"]').checked = true;
+                    } else {
+                        document.querySelector('input[value="figure"]').checked = false;
+
+                    }
+
                 }
             })
         })
     }
     let colorInputs = document.querySelectorAll('input[name="pokrytie"]');
-    let colorWrapper = document.querySelector('.color-wrapper'); 
+    let colorWrapper = document.querySelector('.color-wrapper');
     if (colorWrapper) {
         colorInputs.forEach(function (input) {
             input.addEventListener('change', function (e) {
                 let value = input.value;
                 console.log(value);
                 colorWrapper.querySelectorAll(`.can-hide`).forEach(function (item) {
-                    item.classList.remove('active')
+                    item.classList.remove('active-color')
                     item.querySelector('input').disabled = false;
                     item.querySelector('input').checked = false;
                 })
                 if (input.checked) {
                     colorWrapper.querySelectorAll(`.${value}-disabled`).forEach(function (item) {
-                        item.classList.add('active')
+                        item.classList.add('active-color')
                         item.querySelector('input').disabled = true;
                     })
 
@@ -152,6 +192,110 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    let brandsInputs = document.querySelectorAll('input[name="brand"]');
+    let brandsTypeInputs = document.querySelectorAll('input[name="type"]');
+    let brandsBlocks = document.querySelectorAll('.form__question--brand');
+    for (let i = 0; i < brandsBlocks.length; i++) {
+        brandsInputs[i].addEventListener('change', function (e) {
+            // e.preventDefault();
+            // brandsInputs[i].checked = true;
+            brandsTypeInputs.forEach(function (elem) {
+                elem.checked = false;
+            })
+            brandsBlocks.forEach(function (elem) {
+                elem.classList.add('brand-hide');
+            })
+            brandsBlocks[i].classList.remove('brand-hide');
+        })
+    }
+
+    let calcCustomBtn = document.querySelector('#calc-custom')
+    if (calcCustomBtn) {
+        calcCustomBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector('#schema-inputs__more').classList.toggle('active');
+
+        })
+    }
+
+    // let formInputs = document.querySelectorAll('input[name="form"]');
+    // let formInputs2 = document.querySelectorAll('input[name="form-2"]');
+    // formInputs.forEach(function (input) {
+    //     input.addEventListener('click', function (e) {
+    //         let checkedValue = document.querySelector('input[name="form"]:checked').value;
+    //         if (checkedValue == 'straight') {
+    //             formInputs2.forEach(function (elem) {
+    //                 elem.checked = false;
+    //                 elem.parentElement.classList.add('active-2');
+    //             })
+    //         } else {
+    //             formInputs2.forEach(function (elem) {
+    //                 elem.parentElement.classList.remove('active-2');
+    //             })
+    //         }
+    //     })
+    // })
+    // formInputs2.forEach(function (input) {
+    //     input.addEventListener('click', function (e) {
+    //         document.querySelector('input[value="figure"]').checked = true;
+    //     })
+    // })
+
+
+    let shtaketnikImage = document.getElementById('change-color');
+    let shtaketnikImageBox;
+    if (shtaketnikImage) {
+        shtaketnikImageBox = shtaketnikImage.querySelector('.form__card');
+    }
+    let typeInputsAll = document.querySelectorAll('input[name="type"]');
+    let form2InputsAll = document.querySelectorAll('input[name="form-2"]');
+    let formInputsAll = document.querySelectorAll('input[name="form"]');
+    let colorInputsAll = document.querySelectorAll('input[name="color"]');
+    let shtaketnikForm = document.querySelector('#shtaketnik')
+    if (shtaketnikForm) {
+        shtaketnikForm.addEventListener('change', function () {
+            // let typeValue = type.value ? type.value : 'premium';
+            // let formValue = formInput.value ? formInput.value : 'circle';
+            // let colorValue = color.value ? color.value : '3005';
+
+            let typeValue = 'standard';
+            let form2Value = 'circle';
+            let formValue = '';
+            let colorValue = '3005';
+            typeInputsAll.forEach(item => {
+                if (item.checked) {
+                    typeValue = item.value;
+                }
+            })
+            formInputsAll.forEach(item => {
+                if (item.checked && item.value=="straight") {
+                    formValue = item.value +"-";
+                }
+            })
+            form2InputsAll.forEach(item => {
+                if (item.checked) {
+                    form2Value = item.value;
+                }
+            })
+            colorInputsAll.forEach(item => {
+                if (item.checked) {
+                    colorValue = item.value;
+                }
+            })
+
+            console.log(`${typeValue}-${formValue}${form2Value}-${colorValue}`);
+
+
+            if (typeValue && form2Value && colorValue) {
+                let fileName = `${typeValue}-${formValue}${form2Value}-${colorValue}`;
+                var img = shtaketnikImageBox.querySelector('picture');
+                img.querySelector('img').src = `assets/img/calcs/${fileName}.png`;
+                img.querySelector('source').srcset = `assets/img/calcs/${fileName}.webp`;
+            }
+
+
+        });
+    }
 
 
     // ВРЕМЕННОЕ УБРАТЬ!!!! 
